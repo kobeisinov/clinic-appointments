@@ -59,6 +59,8 @@ The booking view handles concurrent requests as follows:
 
 This gives two layers of protection: the row lock prevents unnecessary contention, and the unique constraint is the final DB-level guarantee that makes the correctness argument independent of application logic or timing.
 
+The test suite covers booking a free slot (success) and re-booking the same slot (rejected). A threaded concurrent test is intentionally omitted: since the correctness guarantee lives in the DB constraint rather than in timing or application logic, the re-booking test exercises the exact same failure path that a losing concurrent request would hit. A threaded test would also require `TransactionTestCase` instead of `TestCase`, which is slower and adds complexity without strengthening the guarantee being tested.
+
 ### Clinic isolation
 
 Every model (`Doctor`, `Slot`) carries a `clinic_id` field. A middleware reads the `Clinic-Id` request header and attaches it to `request.clinic_id`. All querysets filter by this value, so data from one clinic is never reachable from another. Cross-clinic slot booking attempts are rejected in the serializer's `validate_slot` method.
