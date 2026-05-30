@@ -23,6 +23,7 @@ cd backend
 python -m venv ../venv
 source ../venv/bin/activate   # Windows: ..\venv\Scripts\activate
 pip install -r requirements.txt
+cp .env.example .env          # then set a real SECRET_KEY inside
 python manage.py migrate
 python manage.py seed          # load sample doctors and slots
 python manage.py runserver
