@@ -70,6 +70,10 @@ Every model (`Doctor`, `Slot`) carries a `clinic_id` field. A middleware reads t
 
 The base `Doctor` and `Slot` models were extended with a `clinic_id` field. This is required for clinic isolation — without it, there is no way to scope queries to a specific clinic at the DB level. Storing `clinic_id` directly on each model (rather than through a separate `Clinic` entity) keeps the schema simple and queries straightforward for this scope.
 
+### Database
+
+PostgreSQL was chosen over SQLite because it supports real row-level locking (`SELECT FOR UPDATE`), which is required for the concurrent booking guarantee. SQLite serializes all writes at the engine level and silently ignores `SELECT FOR UPDATE`.
+
 ---
 
 ## Incomplete tasks
