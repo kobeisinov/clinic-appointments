@@ -83,6 +83,9 @@ Currently slots are created via a one-off seed command (`python manage.py seed`)
 
 This keeps the booking API unchanged — the frontend always works with pre-generated `Slot` rows regardless of how they were created.
 
+### UI enhancements
+
+The current frontend covers the required functionality but is intentionally minimal: appointment confirmation screen, etc.
 
 ---
 
