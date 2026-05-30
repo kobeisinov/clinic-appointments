@@ -16,6 +16,7 @@ frontend/.next/
 # Env
 .env
 .env.local
+backend/.env
 
 # macOS
 .DS_Store
